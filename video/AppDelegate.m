@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "CustomVideoCompositor.h"
 #import "AVAsset+help.h"
 
 @interface AppDelegate ()
@@ -30,8 +31,8 @@
     }
 
     AVMutableComposition *composition = [AVMutableComposition composition];
-    [self addAsset:frontAsset toComposition:composition];
-    [self addAsset:backAsset toComposition:composition];
+    [self addAsset:frontAsset toComposition:composition withTrackID:1];
+    [self addAsset:backAsset toComposition:composition withTrackID:2];
 
     AVAssetTrack *backVideoTrack = backAsset.firstVideoTrack;
     AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
@@ -40,23 +41,15 @@
 
     AVMutableVideoCompositionInstruction *instruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
     instruction.timeRange = [composition.tracks.firstObject timeRange];
-    AVMutableVideoCompositionLayerInstruction *backLayerInstruction = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:backVideoTrack];
-    AVMutableVideoCompositionLayerInstruction *frontLayerInstruction = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:frontAsset.firstVideoTrack];
+    AVMutableVideoCompositionLayerInstruction *frontLayerInstruction = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstruction];
+    frontLayerInstruction.trackID = 1;
+    AVMutableVideoCompositionLayerInstruction *backLayerInstruction = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstruction];
+    backLayerInstruction.trackID = 2;
     instruction.layerInstructions = @[ frontLayerInstruction, backLayerInstruction ];
 
     videoComposition.instructions = @[ instruction ];
 
-    CALayer *backVideoLayer = [CALayer layer];
-    backVideoLayer.frame = (CGRect){ .origin = CGPointZero, .size = backVideoTrack.naturalSize };
-    backVideoLayer.frame = CGRectMake(0, 0, 480, 540);
-    CALayer *frontVideoLayer = [CALayer layer];
-    frontVideoLayer.frame = CGRectMake(480, 0, 480, 540);
-    frontVideoLayer.mask = [self maskLayerWithFrame:frontVideoLayer.bounds];
-    CALayer *compositeLayer = [CALayer layer];
-    compositeLayer.frame = (CGRect){ CGPointZero, videoComposition.renderSize };
-    [compositeLayer addSublayer:backVideoLayer];
-    [compositeLayer addSublayer:frontVideoLayer];
-    videoComposition.animationTool = [AVVideoCompositionCoreAnimationTool videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayers:@[ frontVideoLayer, backVideoLayer ] inLayer:compositeLayer];
+    videoComposition.customVideoCompositorClass = [CustomVideoCompositor class];
 
     AVAssetExportSession *exporter = [AVAssetExportSession exportSessionWithAsset:composition presetName:AVAssetExportPreset960x540];
     exporter.outputURL = [self outputURL];
@@ -69,8 +62,8 @@
     }];
 }
 
-- (void)addAsset:(AVAsset *)asset toComposition:(AVMutableComposition *)composition {
-    AVMutableCompositionTrack *videoTrack = [composition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
+- (void)addAsset:(AVAsset *)asset toComposition:(AVMutableComposition *)composition withTrackID:(CMPersistentTrackID)trackID {
+    AVMutableCompositionTrack *videoTrack = [composition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:trackID];
     CMTimeRange timeRange = CMTimeRangeFromTimeToTime(kCMTimeZero, CMTimeMake(3, 1));
     AVAssetTrack *assetVideoTrack = asset.firstVideoTrack;
     [videoTrack insertTimeRange:timeRange ofTrack:assetVideoTrack atTime:kCMTimeZero error:nil];
