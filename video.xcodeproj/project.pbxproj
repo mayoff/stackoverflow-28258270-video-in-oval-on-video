@@ -17,8 +17,8 @@
 		3132922F1A7DC806003A28EC /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 3132922E1A7DC806003A28EC /* README.md */; };
 		313292321A7DCC89003A28EC /* AVAsset+help.m in Sources */ = {isa = PBXBuildFile; fileRef = 313292311A7DCC89003A28EC /* AVAsset+help.m */; };
 		313292331A7DEF3D003A28EC /* test 1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3132922D1A7DC7F6003A28EC /* test 1.mp4 */; };
-		313292341A7DEF40003A28EC /* test 2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3132922C1A7DC7F6003A28EC /* test 2.mp4 */; };
 		31A4F6891A7E01A80039F0D2 /* CustomVideoCompositor.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A4F6881A7E01A80039F0D2 /* CustomVideoCompositor.m */; };
+		31A4F68B1A7E0F4E0039F0D2 /* test 2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 31A4F68A1A7E0F4E0039F0D2 /* test 2.mp4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,13 +45,13 @@
 		3132921C1A7DC763003A28EC /* videoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = videoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		313292211A7DC763003A28EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		313292221A7DC763003A28EC /* videoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = videoTests.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		3132922C1A7DC7F6003A28EC /* test 2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "test 2.mp4"; sourceTree = "<group>"; };
 		3132922D1A7DC7F6003A28EC /* test 1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "test 1.mp4"; sourceTree = "<group>"; };
 		3132922E1A7DC806003A28EC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		313292301A7DCC89003A28EC /* AVAsset+help.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AVAsset+help.h"; sourceTree = "<group>"; };
 		313292311A7DCC89003A28EC /* AVAsset+help.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AVAsset+help.m"; sourceTree = "<group>"; };
 		31A4F6871A7E01A80039F0D2 /* CustomVideoCompositor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomVideoCompositor.h; sourceTree = "<group>"; };
 		31A4F6881A7E01A80039F0D2 /* CustomVideoCompositor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomVideoCompositor.m; sourceTree = "<group>"; };
+		31A4F68A1A7E0F4E0039F0D2 /* test 2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "test 2.mp4"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +95,7 @@
 			children = (
 				3132920B1A7DC762003A28EC /* AppDelegate.m */,
 				3132922D1A7DC7F6003A28EC /* test 1.mp4 */,
-				3132922C1A7DC7F6003A28EC /* test 2.mp4 */,
+				31A4F68A1A7E0F4E0039F0D2 /* test 2.mp4 */,
 				3132920A1A7DC762003A28EC /* AppDelegate.h */,
 				31A4F6871A7E01A80039F0D2 /* CustomVideoCompositor.h */,
 				31A4F6881A7E01A80039F0D2 /* CustomVideoCompositor.m */,
@@ -219,9 +219,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				313292121A7DC762003A28EC /* Main.storyboard in Resources */,
+				31A4F68B1A7E0F4E0039F0D2 /* test 2.mp4 in Resources */,
 				313292171A7DC762003A28EC /* LaunchScreen.xib in Resources */,
 				313292331A7DEF3D003A28EC /* test 1.mp4 in Resources */,
-				313292341A7DEF40003A28EC /* test 2.mp4 in Resources */,
 				313292141A7DC762003A28EC /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
