@@ -14,6 +14,7 @@
 		313292141A7DC762003A28EC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 313292131A7DC762003A28EC /* Images.xcassets */; };
 		313292171A7DC762003A28EC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 313292151A7DC762003A28EC /* LaunchScreen.xib */; };
 		313292231A7DC763003A28EC /* videoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 313292221A7DC763003A28EC /* videoTests.m */; };
+		3132922F1A7DC806003A28EC /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 3132922E1A7DC806003A28EC /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,9 @@
 		3132921C1A7DC763003A28EC /* videoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = videoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		313292211A7DC763003A28EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		313292221A7DC763003A28EC /* videoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = videoTests.m; sourceTree = "<group>"; };
+		3132922C1A7DC7F6003A28EC /* test 2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "test 2.mp4"; sourceTree = "<group>"; };
+		3132922D1A7DC7F6003A28EC /* test 1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "test 1.mp4"; sourceTree = "<group>"; };
+		3132922E1A7DC806003A28EC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +85,8 @@
 		313292051A7DC762003A28EC /* video */ = {
 			isa = PBXGroup;
 			children = (
+				3132922D1A7DC7F6003A28EC /* test 1.mp4 */,
+				3132922C1A7DC7F6003A28EC /* test 2.mp4 */,
 				3132920A1A7DC762003A28EC /* AppDelegate.h */,
 				3132920B1A7DC762003A28EC /* AppDelegate.m */,
 				3132920D1A7DC762003A28EC /* ViewController.h */,
@@ -89,6 +95,7 @@
 				313292131A7DC762003A28EC /* Images.xcassets */,
 				313292151A7DC762003A28EC /* LaunchScreen.xib */,
 				313292061A7DC762003A28EC /* Supporting Files */,
+				3132922E1A7DC806003A28EC /* README.md */,
 			);
 			path = video;
 			sourceTree = "<group>";
@@ -221,6 +228,7 @@
 			files = (
 				3132920F1A7DC762003A28EC /* ViewController.m in Sources */,
 				3132920C1A7DC762003A28EC /* AppDelegate.m in Sources */,
+				3132922F1A7DC806003A28EC /* README.md in Sources */,
 				313292091A7DC762003A28EC /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
