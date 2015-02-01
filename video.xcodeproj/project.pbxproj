@@ -15,6 +15,9 @@
 		313292171A7DC762003A28EC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 313292151A7DC762003A28EC /* LaunchScreen.xib */; };
 		313292231A7DC763003A28EC /* videoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 313292221A7DC763003A28EC /* videoTests.m */; };
 		3132922F1A7DC806003A28EC /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 3132922E1A7DC806003A28EC /* README.md */; };
+		313292321A7DCC89003A28EC /* AVAsset+help.m in Sources */ = {isa = PBXBuildFile; fileRef = 313292311A7DCC89003A28EC /* AVAsset+help.m */; };
+		313292331A7DEF3D003A28EC /* test 1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3132922D1A7DC7F6003A28EC /* test 1.mp4 */; };
+		313292341A7DEF40003A28EC /* test 2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3132922C1A7DC7F6003A28EC /* test 2.mp4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +47,8 @@
 		3132922C1A7DC7F6003A28EC /* test 2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "test 2.mp4"; sourceTree = "<group>"; };
 		3132922D1A7DC7F6003A28EC /* test 1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "test 1.mp4"; sourceTree = "<group>"; };
 		3132922E1A7DC806003A28EC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		313292301A7DCC89003A28EC /* AVAsset+help.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AVAsset+help.h"; sourceTree = "<group>"; };
+		313292311A7DCC89003A28EC /* AVAsset+help.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AVAsset+help.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,10 +90,12 @@
 		313292051A7DC762003A28EC /* video */ = {
 			isa = PBXGroup;
 			children = (
+				3132920B1A7DC762003A28EC /* AppDelegate.m */,
 				3132922D1A7DC7F6003A28EC /* test 1.mp4 */,
 				3132922C1A7DC7F6003A28EC /* test 2.mp4 */,
 				3132920A1A7DC762003A28EC /* AppDelegate.h */,
-				3132920B1A7DC762003A28EC /* AppDelegate.m */,
+				313292301A7DCC89003A28EC /* AVAsset+help.h */,
+				313292311A7DCC89003A28EC /* AVAsset+help.m */,
 				3132920D1A7DC762003A28EC /* ViewController.h */,
 				3132920E1A7DC762003A28EC /* ViewController.m */,
 				313292101A7DC762003A28EC /* Main.storyboard */,
@@ -208,6 +215,8 @@
 			files = (
 				313292121A7DC762003A28EC /* Main.storyboard in Resources */,
 				313292171A7DC762003A28EC /* LaunchScreen.xib in Resources */,
+				313292331A7DEF3D003A28EC /* test 1.mp4 in Resources */,
+				313292341A7DEF40003A28EC /* test 2.mp4 in Resources */,
 				313292141A7DC762003A28EC /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -226,6 +235,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				313292321A7DCC89003A28EC /* AVAsset+help.m in Sources */,
 				3132920F1A7DC762003A28EC /* ViewController.m in Sources */,
 				3132920C1A7DC762003A28EC /* AppDelegate.m in Sources */,
 				3132922F1A7DC806003A28EC /* README.md in Sources */,
