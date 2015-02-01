@@ -41,6 +41,7 @@
 
     CALayer *backVideoLayer = [CALayer layer];
     backVideoLayer.frame = (CGRect){ .origin = CGPointZero, .size = backVideoTrack.naturalSize };
+    backVideoLayer.mask = [self maskLayerWithFrame:backVideoLayer.bounds];
     CALayer *compositeLayer = [CALayer layer];
     compositeLayer.frame = backVideoLayer.frame;
     [compositeLayer addSublayer:backVideoLayer];
@@ -68,6 +69,17 @@
     NSURL *url = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:nil];
     url = [url URLByAppendingPathComponent:@"export.mp4"];
     return url;
+}
+
+- (CALayer *)maskLayerWithFrame:(CGRect)frame {
+    UIBezierPath *path = [UIBezierPath bezierPathWithOvalInRect:CGRectInset(frame, frame.size.width / 10, frame.size.height / 10)];
+    CAShapeLayer *layer = [CAShapeLayer layer];
+    layer.frame = frame;
+    layer.path = path.CGPath;
+    layer.backgroundColor = [UIColor clearColor].CGColor;
+    layer.strokeColor = nil;
+    layer.fillColor = [UIColor whiteColor].CGColor;
+    return layer;
 }
 
 @end
