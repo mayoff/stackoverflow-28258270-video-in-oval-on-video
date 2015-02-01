@@ -15,37 +15,48 @@
 
 @implementation AppDelegate {
     AVAsset *backAsset;
+    AVAsset *frontAsset;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [self loadBackAsset];
+    [self loadFrontAsset];
     return YES;
 }
 
 - (void)makeVideo {
-    AVMutableComposition *composition = [AVMutableComposition composition];
-    AVMutableCompositionTrack *videoTrack = [composition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
-    AVAssetTrack *backVideoTrack = backAsset.firstVideoTrack;
-    [videoTrack insertTimeRange:backVideoTrack.timeRange ofTrack:backVideoTrack atTime:kCMTimeZero error:nil];
+    if (!backAsset || !frontAsset) {
+        return;
+    }
 
+    AVMutableComposition *composition = [AVMutableComposition composition];
+    [self addAsset:frontAsset toComposition:composition];
+    [self addAsset:backAsset toComposition:composition];
+
+    AVAssetTrack *backVideoTrack = backAsset.firstVideoTrack;
     AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
     videoComposition.renderSize = backVideoTrack.naturalSize;
     videoComposition.frameDuration = CMTimeMakeWithSeconds(1.0 / backVideoTrack.nominalFrameRate, backVideoTrack.naturalTimeScale);
 
     AVMutableVideoCompositionInstruction *instruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
-    instruction.timeRange = videoTrack.timeRange;
-    AVMutableVideoCompositionLayerInstruction *layerInstruction = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:backVideoTrack];
-    instruction.layerInstructions = @[ layerInstruction ];
+    instruction.timeRange = [composition.tracks.firstObject timeRange];
+    AVMutableVideoCompositionLayerInstruction *backLayerInstruction = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:backVideoTrack];
+    AVMutableVideoCompositionLayerInstruction *frontLayerInstruction = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:frontAsset.firstVideoTrack];
+    instruction.layerInstructions = @[ frontLayerInstruction, backLayerInstruction ];
 
     videoComposition.instructions = @[ instruction ];
 
     CALayer *backVideoLayer = [CALayer layer];
     backVideoLayer.frame = (CGRect){ .origin = CGPointZero, .size = backVideoTrack.naturalSize };
-    backVideoLayer.mask = [self maskLayerWithFrame:backVideoLayer.bounds];
+    backVideoLayer.frame = CGRectMake(0, 0, 480, 540);
+    CALayer *frontVideoLayer = [CALayer layer];
+    frontVideoLayer.frame = CGRectMake(480, 0, 480, 540);
+    frontVideoLayer.mask = [self maskLayerWithFrame:frontVideoLayer.bounds];
     CALayer *compositeLayer = [CALayer layer];
-    compositeLayer.frame = backVideoLayer.frame;
+    compositeLayer.frame = (CGRect){ CGPointZero, videoComposition.renderSize };
     [compositeLayer addSublayer:backVideoLayer];
-    videoComposition.animationTool = [AVVideoCompositionCoreAnimationTool videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayers:@[ backVideoLayer ] inLayer:compositeLayer];
+    [compositeLayer addSublayer:frontVideoLayer];
+    videoComposition.animationTool = [AVVideoCompositionCoreAnimationTool videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayers:@[ frontVideoLayer, backVideoLayer ] inLayer:compositeLayer];
 
     AVAssetExportSession *exporter = [AVAssetExportSession exportSessionWithAsset:composition presetName:AVAssetExportPreset960x540];
     exporter.outputURL = [self outputURL];
@@ -58,9 +69,25 @@
     }];
 }
 
+- (void)addAsset:(AVAsset *)asset toComposition:(AVMutableComposition *)composition {
+    AVMutableCompositionTrack *videoTrack = [composition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
+    CMTimeRange timeRange = CMTimeRangeFromTimeToTime(kCMTimeZero, CMTimeMake(3, 1));
+    AVAssetTrack *assetVideoTrack = asset.firstVideoTrack;
+    [videoTrack insertTimeRange:timeRange ofTrack:assetVideoTrack atTime:kCMTimeZero error:nil];
+}
+
 - (void)loadBackAsset {
-    backAsset = [AVAsset mp4AssetWithResourceName:@"test 1"];
-    [backAsset whenProperties:@[ @"tracks" ] isReadyDo:^{
+    AVAsset *asset = [AVAsset mp4AssetWithResourceName:@"test 1"];
+    [asset whenProperties:@[ @"tracks" ] isReadyDo:^{
+        backAsset = asset;
+        [self makeVideo];
+    }];
+}
+
+- (void)loadFrontAsset {
+    AVAsset *asset = [AVAsset mp4AssetWithResourceName:@"test 2"];
+    [asset whenProperties:@[ @"tracks" ] isReadyDo:^{
+        frontAsset = asset;
         [self makeVideo];
     }];
 }
