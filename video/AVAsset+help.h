@@ -13,6 +13,6 @@
 + (instancetype)mp4AssetWithResourceName:(NSString *)name;
 - (AVAssetTrack *)firstVideoTrack;
 
-- (void)whenProperties:(NSArray *)propertyNames isReadyDo:(void (^)(void))block;
+- (void)whenProperties:(NSArray *)propertyNames areReadyDo:(void (^)(void))block;
 
 @end

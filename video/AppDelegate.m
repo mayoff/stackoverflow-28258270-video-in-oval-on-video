@@ -71,7 +71,7 @@
 
 - (void)loadBackAsset {
     AVAsset *asset = [AVAsset mp4AssetWithResourceName:@"test 1"];
-    [asset whenProperties:@[ @"tracks" ] isReadyDo:^{
+    [asset whenProperties:@[ @"tracks" ] areReadyDo:^{
         backAsset = asset;
         [self makeVideo];
     }];
@@ -79,7 +79,7 @@
 
 - (void)loadFrontAsset {
     AVAsset *asset = [AVAsset mp4AssetWithResourceName:@"test 2"];
-    [asset whenProperties:@[ @"tracks" ] isReadyDo:^{
+    [asset whenProperties:@[ @"tracks" ] areReadyDo:^{
         frontAsset = asset;
         [self makeVideo];
     }];

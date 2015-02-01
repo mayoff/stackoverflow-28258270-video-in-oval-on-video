@@ -20,7 +20,7 @@
     return [tracks firstObject];
 }
 
-- (void)whenProperties:(NSArray *)names isReadyDo:(void (^)(void))block {
+- (void)whenProperties:(NSArray *)names areReadyDo:(void (^)(void))block {
     [self loadValuesAsynchronouslyForKeys:names completionHandler:^{
         NSMutableArray *pendingNames;
         for (NSString *name in names) {
@@ -39,7 +39,7 @@
         if (pendingNames == nil) {
             block();
         } else {
-            [self whenProperties:pendingNames isReadyDo:block];
+            [self whenProperties:pendingNames areReadyDo:block];
         }
     }];
 }
