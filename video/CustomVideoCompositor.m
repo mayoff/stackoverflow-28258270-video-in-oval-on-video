@@ -3,7 +3,7 @@
 //  video
 //
 //  Created by Rob Mayoff on 2/1/15.
-//  Copyright (c) 2015 Rob Mayoff. All rights reserved.
+//  Placed in the public domain by Rob Mayoff.
 //
 
 #import "CustomVideoCompositor.h"
